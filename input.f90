@@ -1,9 +1,5 @@
 Module input
 
-  Implicit none
-
-  save
-
   !########################################################
   Character(len=*),parameter :: cosmological_model = 'lcdm'
   ! OPTIONS FOR cosmological_model ARE:
@@ -18,7 +14,7 @@ Module input
   Real*8,parameter :: a_fin = 1.d0  ! FINAL SCALE FACTOR
 
   ! COSMOLOGICAL PARAMETERS FOR cosmological_model = 'lcdm'
-  Real*8,parameter :: Omega_Lambda = ! PARAMETER DENSITY COSMOLOGICAL CONSTANT.
+  !Real*8,parameter :: Omega_Lambda = ! PARAMETER DENSITY COSMOLOGICAL CONSTANT.
   
   ! COSMOLOGICAL PARAMETERS FOR cosmological_model = 'wcdm'
   !Real*8,parameter :: Omega_DE
