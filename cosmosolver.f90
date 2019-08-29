@@ -1,9 +1,29 @@
 Program cosmosolver
 
   ! LOAD MODULES AND LIBRARIES
+  use input
+  use background
 
-  ! START TIMING PERFORMANCE OF THE CODE
+  ! CREATE OUTPUT DIRECTORY IF NEEDED
+  inquire(file='./output',exist=dir_exist)
+
+  If (dir_exist) then
+
+     continue
+
+  Else
+
+     call system('mkdir output')
+
+  End if
+
+  ! OPEN EXECUTION INFORMATION FILE FOR WRITING
+  open(UNIT_EXE_FILE,file=Execution_information)
   
+  ! START TIMING PERFORMANCE OF THE CODE
+
+  write(UNIT_EXE_FILE,*) '...CODE STARTED EXECUTION'
+
   ! DEFINE VARIABLES, PARAMETERS, ETC.
 
   ! SUBROUTINE CHECKING CONSISTENCY OF INPUT VALUES
@@ -17,5 +37,7 @@ Program cosmosolver
   ! SUBROUTINE PLOTTING OUTPUT
 
   ! END TIMING PERFORMANCE OF THE CODE
+
+  close(UNIT_EXE_FILE)
   
 End Program cosmosolver

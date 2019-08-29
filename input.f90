@@ -3,10 +3,17 @@ Module input
   !########################################################
   Character(len=*),parameter :: cosmological_model = 'lcdm'
   ! OPTIONS FOR cosmological_model ARE:
-  ! lcdm:  STANDARD MODEL OF COSMOLOGY INCLUDING COSMOLOGICAL CONSTANT, COLD DARK MATTER (CDM), PHOTONS, MASSIVE NEUTRINOS, BARYONS, SIMPLE INFLATIONARY MODEL
-  ! wcdm:  COSMOLOGICAL MODEL INCLUDING DARK ENERGY (DE) FLUID [EQUATION OF STATE, SOUND SPEED, AND ANISOTROPIC STRESS], COLD DARK MATTER, PHOTONS, MASSIVE NEUTRINOS, BARYONS, SIMPLE INFLATIONARY MODEL
+  ! lcdm:  STANDARD MODEL OF COSMOLOGY INCLUDING COSMOLOGICAL CONSTANT, COLD DARK MATTER (CDM), PHOTONS, MASSIVE NEUTRINOS, BARYONS, SIMPLE INFLATIONARY
+  !        MODEL
+  ! wcdm:  COSMOLOGICAL MODEL INCLUDING DARK ENERGY (DE) FLUID [EQUATION OF STATE, SOUND SPEED, AND ANISOTROPIC STRESS], COLD DARK MATTER, PHOTONS,
+  !        MASSIVE NEUTRINOS, BARYONS, SIMPLE INFLATIONARY MODEL
   ! scdm:  SAME INGREDIENTS AS FOR wcdm, EXCEPT FOR DE WHICH IS MODELLED WITH SCALAR FIELDS
-  ! mgcdm: SAME INGREDIENTS AS FOR wcdm, EXCEPT FOR DE WHICH IS REPLACED BY MODIFICATIONS TO THE THEORY OF GRAVITY.  
+  ! mgcdm: SAME INGREDIENTS AS FOR wcdm, EXCEPT FOR DE WHICH IS REPLACED BY MODIFICATIONS TO THE THEORY OF GRAVITY.
+  !########################################################
+
+  !########################################################
+  Real*8,parameter :: G_N = 6.6740831d-11 ! GRAVITATIONAL CONSTANT FROM PARTICLE DATA GROUP (PDG). UNITS: [m^3/kg/s^2]
+  Real*8,parameter :: c = 299792458d0     ! SPEED OF LIGHT IN VACUUM FROM PDG. UNITS: [m/s]
   !########################################################
   
   !########################################################
@@ -14,7 +21,9 @@ Module input
   Real*8,parameter :: a_fin = 1.d0  ! FINAL SCALE FACTOR
 
   ! COSMOLOGICAL PARAMETERS FOR cosmological_model = 'lcdm'
-  !Real*8,parameter :: Omega_Lambda = ! PARAMETER DENSITY COSMOLOGICAL CONSTANT.
+  Real*8,parameter :: Omega_m0 = 0.315d0 ! PARAMETER DENSITY MATTER FROM 2018 PLANCK PAPER ASSUMING SIX-PARAMETER LCDM MODEL
+  Real*8,parameter :: Omega_Lambda = 1.d0 - Omega_m0 ! PARAMETER DENSITY COSMOLOGICAL CONSTANT ASSUMING FLATNESS
+  Real*8,parameter :: H0 = 67.4d0 ! HUBBLE PARAMETER TODAY. UNITS: [km/s/Mpc]
   
   ! COSMOLOGICAL PARAMETERS FOR cosmological_model = 'wcdm'
   !Real*8,parameter :: Omega_DE
@@ -32,6 +41,12 @@ Module input
   
   !########################################################
   Integer*4,parameter :: order = 1 ! SOLVE PERTURBATION EQUATIONS UP TO ORDER order
+  !########################################################
+
+  !########################################################
+  Logical                    :: dir_exist ! CHECK EXISTENCE OF FILES
+  Integer*4,parameter        :: UNIT_EXE_FILE = 91 ! UNIT FILE EXECUTION INFORMATION
+  Character(len=*),parameter :: Execution_information = './output/execution_information.txt' ! FILE NAME FOR EXECUTION INFORMATION
   !########################################################
   
 End module input
