@@ -1,5 +1,7 @@
 Module input
 
+  use fgsl
+
   !########################################################
   Character(len=*),parameter :: cosmological_model = 'lcdm'
   ! OPTIONS FOR cosmological_model ARE:
@@ -12,8 +14,8 @@ Module input
   !########################################################
 
   !########################################################
-  Real*8,parameter :: G_N = 6.6740831d-11 ! GRAVITATIONAL CONSTANT FROM PARTICLE DATA GROUP (PDG). UNITS: [m^3/kg/s^2]
-  Real*8,parameter :: c = 299792458d0     ! SPEED OF LIGHT IN VACUUM FROM PDG. UNITS: [m/s]
+  Real*8,parameter :: G_N = fgsl_const_mksa_gravitational_constant ! GRAVITATIONAL CONSTANT. UNITS: [m^3/kg/s^2]
+  Real*8,parameter :: c = fgsl_const_mksa_speed_of_light  ! SPEED OF LIGHT IN VACUUM. UNITS: [m/s]
   !########################################################
   
   !########################################################
@@ -24,6 +26,7 @@ Module input
   Real*8,parameter :: Omega_m0 = 0.315d0 ! PARAMETER DENSITY MATTER FROM 2018 PLANCK PAPER ASSUMING SIX-PARAMETER LCDM MODEL
   Real*8,parameter :: Omega_Lambda = 1.d0 - Omega_m0 ! PARAMETER DENSITY COSMOLOGICAL CONSTANT ASSUMING FLATNESS
   Real*8,parameter :: H0 = 67.4d0 ! HUBBLE PARAMETER TODAY. UNITS: [km/s/Mpc]
+  Real*8,parameter :: k = 2.d2*(H0/c*1.d3) ! COMOVING WAVENUMBER. UNITS: [1/Mpc]
   
   ! COSMOLOGICAL PARAMETERS FOR cosmological_model = 'wcdm'
   !Real*8,parameter :: Omega_DE
